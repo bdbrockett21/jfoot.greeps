@@ -26,10 +26,20 @@ public class Greep extends Creature {
         if (isCarryingTomato()) {
             if (isAtShip()) {
                 dropTomato();
+            } else if (isAtWorldEdge() || isAtWater()) {
+                turnRandomDegrees(15,95);
             } else {
                 turnTowardsHome();
             }
         }
+        if(!isCarryingTomato()) {
+            turnTowards(getSurroundingTomatoPile());
+            checkFood();
+
+            if(isAtWorldEdge() || isAtWater()) turnRandomDegrees(15,95);
+
+        }
+
         move();
     }
 
